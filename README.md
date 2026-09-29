@@ -13,4 +13,4 @@ Uma aplicação web leve e moderna criada para armazenar, organizar e copiar seu
 - Interface limpa e responsiva.
 
 ---
-Feito com 💻 por [Seu Nome] para o portfólio rumo ao estágio!
+Feito com 💻 por Gabriel Cardoso para o portfólio rumo ao estágio!
