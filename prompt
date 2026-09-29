@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Organizador de Prompts</title>
+    <!-- Usando o visual pronto do Tailwind para ficar bonito rápido -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 p-6">
+
+    <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
+        <h1 class="text-2xl font-bold text-slate-800 mb-4">Meu Bloco de Prompts 🚀</h1>
+
+        <!-- Formulário para adicionar -->
+        <div class="space-y-3 mb-6">
+            <input type="text" id="tituloPrompt" placeholder="Título do Prompt (ex: Corrigir código)" class="w-full p-2 border rounded-lg">
+            <textarea id="textoPrompt" placeholder="Escreva o prompt aqui..." class="w-full p-2 border rounded-lg h-24"></textarea>
+            <button onclick="salvarPrompt()" class="w-full bg-blue-600 text-white p-2 rounded-lg font-bold hover:bg-blue-700">Salvar Prompt</button>
+        </div>
+
+        <!-- Lista onde os prompts vão aparecer -->
+        <div id="listaPrompts" class="space-y-3">
+            <!-- Os prompts salvos aparecem aqui automaticamente -->
+        </div>
+    </div>
+
+    <script>
+        // Função que roda quando clica em salvar
+        function salvarPrompt() {
+            let titulo = document.getElementById('tituloPrompt').value;
+            let texto = document.getElementById('textoPrompt').value;
+
+            if (titulo === "" || texto === "") {
+                alert("Preencha todos os campos!");
+                return;
+            }
+
+            let lista = document.getElementById('listaPrompts');
+
+            // Cria o bloquinho visual do prompt
+            let novoCard = document.createElement('div');
+            novoCard.className = "p-4 bg-slate-50 border rounded-lg relative";
+            novoCard.innerHTML = `
+                <h3 class="font-bold text-blue-600">${titulo}</h3>
+                <p class="text-slate-600 text-sm mt-1 mb-3">${texto}</p>
+                <button onclick="copiarTexto(this)" data-texto="${texto}" class="bg-emerald-500 text-white text-xs px-3 py-1 rounded hover:bg-emerald-600">Copiar</button>
+            `;
+
+            lista.appendChild(novoCard);
+
+            // Limpa os campos
+            document.getElementById('tituloPrompt').value = "";
+            document.getElementById('textoPrompt').value = "";
+        }
+
+        // Função do botão de copiar
+        function copiarTexto(botao) {
+            let textoParaCopiar = botao.getAttribute('data-texto');
+            navigator.clipboard.writeText(textoParaCopiar);
+            botao.innerText = "Copiado! 🎉";
+            setTimeout(() => {
+                botao.innerText = "Copiar";
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
